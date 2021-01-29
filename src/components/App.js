@@ -6,6 +6,7 @@ import ContactList from "./contactList/ContactList";
 import Filter from "./filter/Filter";
 import { Container } from "./AppStyled";
 import Notification from "./notification/Notification";
+import { connect } from "react-redux";
 
 // const initialState = {
 //   contacts: [],
@@ -13,7 +14,7 @@ import Notification from "./notification/Notification";
 //   alert: false,
 // };
 
-const App = () => {
+const App = ({contacts}) => {
   // const [state, setState] = useState({ ...initialState });
 
   // useEffect(() => {
@@ -91,20 +92,17 @@ const App = () => {
       <ContactForm /> {/* onAddContact={addContact} */}
 
       <CSSTransition
-        in={false} /* state.contacts.length > 1 */
+        in={contacts.length > 1}
         classNames="filter"
         timeout={500}
         unmountOnExit
       >
-        <Filter  /> {/*value={state.filter} onChangeFilter={changeFilter}*/}
+        <Filter />
       </CSSTransition>
 
-      {/* <ContactList
-        // contacts={getFilteredContacts()}
-        // onDeleteContact={deleteContact}
-      /> */}
+      <ContactList/>
 
-      {/* {!state.contacts.length && <p>There are no contacts in current list.</p>} */}
+      {!contacts.length && <p>There are no contacts in current list.</p>}
       {/* <CSSTransition
         in={state.alert}
         classNames="Notification"
@@ -118,4 +116,9 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contacts.items,
+  };
+};
+export default connect(mapStateToProps)(App);

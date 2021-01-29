@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { ADD_CONTACT, DELETE_CONTACT, SET_FILTER } from "../PhonebookConstants";
 
-export const addContact = (contact) => ({
+export const addContact = (name, number) => ({
   type: ADD_CONTACT,
   payload: {
-    contact,
+    contact:{name, number, id:uuidv4() },
   },
 });
 

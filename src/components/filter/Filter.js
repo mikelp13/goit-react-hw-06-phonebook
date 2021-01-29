@@ -3,8 +3,13 @@ import { connect } from "react-redux";
 import { setFilter } from "../../redux/actions/phonebookActions";
 import { FilterWrapper, FilterInput} from "./FilterStyled"
 
-
 const Filter = ({ value, setFilter }) => {
+
+  const handleChange =(e)=>{
+    const {value} = e.target
+    setFilter(value);
+  }
+
   return (
     <FilterWrapper>
       <label>
@@ -12,7 +17,7 @@ const Filter = ({ value, setFilter }) => {
       <FilterInput
         type="text"
         value={value}
-        onChange={setFilter}
+        onChange={handleChange}
         placeholder="Search..."
       ></FilterInput>
       </label>

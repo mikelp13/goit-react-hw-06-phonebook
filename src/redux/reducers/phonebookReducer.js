@@ -28,6 +28,7 @@ const phonebookReducer = (state = { ...initialState }, action) => {
               (item) => item.id !== action.payload.id
             ),
           ],
+          filter: "",
         },
       };
 

@@ -7,10 +7,9 @@ import { connect } from "react-redux";
 import { deleteContact } from "../../redux/actions/phonebookActions";
 
 const ContactList = ({ contacts, deleteContact }) => {
-
   const handleDeleteContact = (e) => {
-    deleteContact(e.target.dataset.id)
-    
+    const { id } = e.target.dataset;
+    deleteContact(id);
   };
   return (
     <Wrapper>
@@ -33,7 +32,9 @@ const ContactList = ({ contacts, deleteContact }) => {
 };
 const mapStateToProps = (state) => {
   return {
-    contacts: state.contacts.items,
+    contacts: state.contacts.items.filter((item) =>
+      item.name.toLowerCase().includes(state.contacts.filter.toLowerCase())
+    ),
   };
 };
 

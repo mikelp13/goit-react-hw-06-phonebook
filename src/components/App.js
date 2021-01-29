@@ -89,16 +89,17 @@ const App = ({contacts}) => {
         <h1>Phonebook</h1>
       </CSSTransition>
 
-      <ContactForm /> {/* onAddContact={addContact} */}
+      <ContactForm /> 
 
       <CSSTransition
-        in={contacts.length > 1}
+        in={contacts.length > 1} 
         classNames="filter"
         timeout={500}
         unmountOnExit
       >
-        <Filter />
+        <Filter /> 
       </CSSTransition>
+
 
       <ContactList/>
 

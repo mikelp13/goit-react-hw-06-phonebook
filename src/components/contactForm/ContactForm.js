@@ -4,7 +4,7 @@ import { addContact } from "../../redux/actions/phonebookActions";
 import Notification from "../notification/Notification";
 import { Form, Input, Button } from "./ContactFormStyled";
 import { CSSTransition } from "react-transition-group";
-import PropTypes from "prop-types";
+
 
 const initialState = {
   name: "",
@@ -99,6 +99,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
-// ContactForm.propTypes = {
-//   onAddContact: PropTypes.func.isRequired
-// }
+

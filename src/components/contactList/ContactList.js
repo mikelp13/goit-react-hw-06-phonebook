@@ -1,12 +1,12 @@
 import React from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import ContactListItem from "./contactListItem/ContactListItem";
-import PropTypes from "prop-types";
-import { Wrapper } from "./ContactListStyled";
 import { connect } from "react-redux";
+import ContactListItem from "./contactListItem/ContactListItem";
 import { deleteContact, setFilter } from "../../redux/actions/phonebookActions";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Wrapper } from "./ContactListStyled";
 
 const ContactList = ({ contacts, deleteContact, setFilter }) => {
+
   const handleDeleteContact = (e) => {
     const { id } = e.target.dataset;
     deleteContact(id);
@@ -31,6 +31,7 @@ const ContactList = ({ contacts, deleteContact, setFilter }) => {
     </Wrapper>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     contacts: state.contacts.items.filter((item) =>
@@ -52,13 +53,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  deleteContact: PropTypes.func.isRequired,
-};
+

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import ContactForm from "./contactForm/ContactForm";
 import ContactList from "./contactList/ContactList";
@@ -6,14 +6,7 @@ import Filter from "./filter/Filter";
 import { CSSTransition } from "react-transition-group";
 import { Container } from "./AppStyled";
 
-// const initialState = {
-//   contacts: [],
-//   filter: "",
-//   alert: false,
-// };
-
-const App = ({contacts}) => {
-  // const [state, setState] = useState({ ...initialState });
+const App = ({ contacts }) => {
 
   // useEffect(() => {
   //   const storageContacts = localStorage.getItem("contacts");
@@ -28,7 +21,6 @@ const App = ({contacts}) => {
   //   localStorage.setItem("contacts", JSON.stringify(state.contacts));
   // }, [state.contacts]);
 
-
   return (
     <Container>
       <CSSTransition
@@ -41,22 +33,20 @@ const App = ({contacts}) => {
         <h1>Phonebook</h1>
       </CSSTransition>
 
-      <ContactForm /> 
+      <ContactForm />
 
       <CSSTransition
-        in={contacts.length > 1} 
+        in={contacts.length > 1}
         classNames="filter"
         timeout={500}
         unmountOnExit
       >
-        <Filter /> 
+        <Filter />
       </CSSTransition>
 
-
-      <ContactList/>
+      <ContactList />
 
       {!contacts.length && <p>There are no contacts in current list.</p>}
-    
     </Container>
   );
 };
@@ -66,4 +56,5 @@ const mapStateToProps = (state) => {
     contacts: state.contacts.items,
   };
 };
+
 export default connect(mapStateToProps)(App);

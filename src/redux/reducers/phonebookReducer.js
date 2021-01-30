@@ -1,45 +1,59 @@
-import { ADD_CONTACT, DELETE_CONTACT, SET_FILTER } from "../PhonebookConstants";
+import { combineReducers } from "redux";
+import itemsReducer from "./itemsReducer";
+import filterReducer from "./filterReducer";
 
-const initialState = {
-  contacts: {
-    items: [],
-    filter: "",
-  },
-};
+// ============ combineReducers ===================================
 
-const phonebookReducer = (state = { ...initialState }, action) => {
-  switch (action.type) {
-    case ADD_CONTACT:
-      return {
-        ...state,
-        contacts: {
-          ...state.contacts,
-          items: [...state.contacts.items, action.payload.contact],
-        },
-      };
+const phonebookReducer = combineReducers({
+  items: itemsReducer,
+  filter: filterReducer,
+});
 
-    case DELETE_CONTACT:
-      return {
-        ...state,
-        contacts: {
-          ...state.contacts,
-          items: [
-            ...state.contacts.items.filter(
-              (item) => item.id !== action.payload.id
-            ),
-          ],
-          filter: "",
-        },
-      };
+export default phonebookReducer;
 
-    case SET_FILTER:
-      return {
-        ...state,
-        contacts: { ...state.contacts, filter: action.payload.value },
-      };
-    default:
-      return state;
-  }
-};
+// // =========== phoneReducer =======================================
+// import { ADD_CONTACT, DELETE_CONTACT, SET_FILTER } from "../PhonebookConstants";
 
-export default phonebookReducer
+// const initialState = {
+//   contacts: {
+//     items: [],
+//     filter: "",
+//   },
+// };
+
+// const phonebookReducer = (state = { ...initialState }, action) => {
+//   switch (action.type) {
+//     case ADD_CONTACT:
+//       return {
+//         ...state,
+//         contacts: {
+//           ...state.contacts,
+//           items: [...state.contacts.items, action.payload.contact],
+//         },
+//       };
+
+//     case DELETE_CONTACT:
+//       return {
+//         ...state,
+//         contacts: {
+//           ...state.contacts,
+//           items: [
+//             ...state.contacts.items.filter(
+//               (item) => item.id !== action.payload.id
+//             ),
+//           ],
+//           filter: "",
+//         },
+//       };
+
+//     case SET_FILTER:
+//       return {
+//         ...state,
+//         contacts: { ...state.contacts, filter: action.payload.value },
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+// export default phonebookReducer

@@ -1,23 +1,42 @@
 import { v4 as uuidv4 } from "uuid";
-import { ADD_CONTACT, DELETE_CONTACT, SET_FILTER } from "../PhonebookConstants";
+import { createAction } from "@reduxjs/toolkit";
 
-export const addContact = (name, number) => ({
-  type: ADD_CONTACT,
-  payload: {
-    contact:{name, number, id:uuidv4() },
-  },
-});
+// ========= redux toolkit ===========================
 
-export const deleteContact = (id) => ({
-  type: DELETE_CONTACT,
-  payload: {
-    id,
-  },
-});
+export const addContact = createAction(
+  "phonebook/addNewContact",
+  (name, number) => ({
+    payload: {
+      contact: { name, number, id: uuidv4() },
+    },
+  })
+);
 
-export const setFilter = (value) => ({
-  type: SET_FILTER,
-  payload: {
-    value,
-  },
-});
+export const deleteContact = createAction("phonebook/deleteContact")
+export const setFilter = createAction("phonebook/setFilter")
+
+
+// // ========= pure redux ===========================
+
+// import { ADD_CONTACT, DELETE_CONTACT, SET_FILTER } from "../PhonebookConstants";
+
+// export const addContact = (name, number) => ({
+//   type: ADD_CONTACT,
+//   payload: {
+//     contact:{name, number, id:uuidv4() },
+//   },
+// });
+
+// export const deleteContact = (id) => ({
+//   type: DELETE_CONTACT,
+//   payload: {
+//     id,
+//   },
+// });
+
+// export const setFilter = (value) => ({
+//   type: SET_FILTER,
+//   payload: {
+//     value,
+//   },
+// });

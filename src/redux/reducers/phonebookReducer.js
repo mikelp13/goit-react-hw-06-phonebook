@@ -1,17 +1,67 @@
 import { combineReducers } from "redux";
-import itemsReducer from "./itemsReducer";
-import filterReducer from "./filterReducer";
+import { createReducer } from "@reduxjs/toolkit";
+import {
+  addContact,
+  deleteContact,
+  setFilter,
+} from "../actions/phonebookActions";
 
-// ============ combineReducers ===================================
+// ========== redux toolkit ============================
+
+const items = createReducer([], {
+  [addContact]: (state, action) => [...state, action.payload.contact],
+  [deleteContact]: (state, action) => [
+    ...state.filter((item) => item.id !== action.payload),
+  ],
+});
+
+const filter = createReducer("", {
+  [setFilter]: (state, action) => action.payload,
+});
 
 const phonebookReducer = combineReducers({
-  items: itemsReducer,
-  filter: filterReducer,
+  items,
+  filter,
 });
 
 export default phonebookReducer;
 
-// // =========== phoneReducer =======================================
+// ============ combineReducers ===================================
+
+// import { ADD_CONTACT, DELETE_CONTACT } from "../PhonebookConstants";
+
+// const itemsReducer = (state = [], action) => {
+//   switch (action.type) {
+//     case ADD_CONTACT:
+//       return [...state, action.payload.contact];
+
+//     case DELETE_CONTACT:
+//       return [...state.filter((item) => item.id !== action.payload.id)];
+
+//     default:
+//       return state;
+//   }
+// };
+
+// const filterReducer = (state = "", action) => {
+//   switch (action.type) {
+//     case SET_FILTER:
+//       return action.payload.value ;
+
+//     default:
+//       return state;
+//   }
+// };
+
+// const phonebookReducer = combineReducers({
+//   items: itemsReducer,
+//   filter: filterReducer,
+// });
+
+// export default phonebookReducer;
+
+// // =========== phonebookReducer pure redux =======================================
+
 // import { ADD_CONTACT, DELETE_CONTACT, SET_FILTER } from "../PhonebookConstants";
 
 // const initialState = {

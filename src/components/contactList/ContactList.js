@@ -4,12 +4,13 @@ import ContactListItem from "./contactListItem/ContactListItem";
 import PropTypes from "prop-types";
 import { Wrapper } from "./ContactListStyled";
 import { connect } from "react-redux";
-import { deleteContact } from "../../redux/actions/phonebookActions";
+import { deleteContact, setFilter } from "../../redux/actions/phonebookActions";
 
-const ContactList = ({ contacts, deleteContact }) => {
+const ContactList = ({ contacts, deleteContact, setFilter }) => {
   const handleDeleteContact = (e) => {
     const { id } = e.target.dataset;
     deleteContact(id);
+    setFilter("");
   };
   return (
     <Wrapper>
@@ -42,6 +43,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     deleteContact: (id) => {
       dispatch(deleteContact(id));
+    },
+    setFilter: (value) => {
+      dispatch(setFilter(value));
     },
   };
 };

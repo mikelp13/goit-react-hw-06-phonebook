@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addContact } from "../../redux/actions/phonebookActions";
+import { addContact, getContacts } from "../../redux/actions/phonebookActions";
 import Notification from "../notification/Notification";
 import { Form, Input, Button } from "./ContactFormStyled";
 import { CSSTransition } from "react-transition-group";
-
 
 const initialState = {
   name: "",
@@ -12,8 +11,20 @@ const initialState = {
   alert: false,
 };
 
-const ContactForm = ({ contacts, addContact }) => {
+const ContactForm = ({ contacts, addContact, getContacts }) => {
   const [state, setState] = useState({ ...initialState });
+
+  useEffect(() => {
+    if (localStorage.getItem("contacts")) {
+      const contacts = JSON.parse(localStorage.getItem("contacts"));
+      getContacts(contacts);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,9 +105,10 @@ const mapDispatchToProps = (dispatch) => {
     addContact: (name, number) => {
       dispatch(addContact(name, number));
     },
+    getContacts: (contacts) => {
+      dispatch(getContacts(contacts));
+    },
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
-
-

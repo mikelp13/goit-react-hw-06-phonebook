@@ -3,6 +3,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import {
   addContact,
   deleteContact,
+  getContacts,
   setFilter,
 } from "../actions/phonebookActions";
 
@@ -13,11 +14,13 @@ const items = createReducer([], {
   [deleteContact]: (state, action) => [
     ...state.filter((item) => item.id !== action.payload),
   ],
+  [getContacts]:(state, action) =>[...action.payload],
 });
 
 const filter = createReducer("", {
   [setFilter]: (state, action) => action.payload,
 });
+
 
 const phonebookReducer = combineReducers({
   items,

@@ -14,6 +14,7 @@ export const addContact = createAction(
 
 export const deleteContact = createAction("phonebook/deleteContact")
 export const setFilter = createAction("phonebook/setFilter")
+export const getContacts = createAction("phonebook/getContacts")
 
 
 // // ========= pure redux ===========================

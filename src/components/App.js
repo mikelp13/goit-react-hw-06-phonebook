@@ -8,19 +8,6 @@ import { Container } from "./AppStyled";
 
 const App = ({ contacts }) => {
 
-  // useEffect(() => {
-  //   const storageContacts = localStorage.getItem("contacts");
-  //   storageContacts &&
-  //     setState((prevState) => ({
-  //       ...prevState,
-  //       contacts: JSON.parse(storageContacts),
-  //     }));
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("contacts", JSON.stringify(state.contacts));
-  // }, [state.contacts]);
-
   return (
     <Container>
       <CSSTransition
